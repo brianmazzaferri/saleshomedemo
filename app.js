@@ -10,48 +10,48 @@ const app = new App({
   clientId: process.env.SLACK_CLIENT_ID,
   clientSecret: process.env.SLACK_CLIENT_SECRET,
   stateSecret: 'my-state-secret',
-  scopes: ['channels:join','channels:manage','channels:read','chat:write','chat:write.public','groups:write','links:write','commands', 'pins:write'], //add scopes here
+  scopes: ['channels:join','channels:manage','channels:read','chat:write','chat:write.public','groups:write','links:write','commands', 'pins:write', 'admin.conversations:write'], //add scopes here
   installationStore: {
     storeInstallation: (installation) => {
 	    
-    if (installation.isEnterpriseInstall && installation.enterprise !== undefined) {       
-          console.log("ENTERPRISE INSTALLATION:");
-          console.log(installation);
-          return db.insert(installation, (err, newDoc) => {
-      if (err) console.log("There's a problem with the database ", err);
-      else if (newDoc) console.log("enterprise installation insert completed");
-          });
-    }	
-
-    if (installation.team !== undefined) {       
-          console.log("SINGLE TEAM INSTALLATION:");
-          console.log(installation);
-          return db.insert(installation, (err, newDoc) => {
-      if (err) console.log("There's a problem with the database ", err);
-      else if (newDoc) console.log("single team installation insert completed");
-          });
-    }	
+	if (installation.isEnterpriseInstall && installation.enterprise !== undefined) {       
+	      console.log("ENTERPRISE INSTALLATION:");
+	      console.log(installation);
+	      return db.insert(installation, (err, newDoc) => {
+		if (err) console.log("There's a problem with the database ", err);
+		else if (newDoc) console.log("enterprise installation insert completed");
+	      });
+	}	
+	    
+	if (installation.team !== undefined) {       
+	      console.log("SINGLE TEAM INSTALLATION:");
+	      console.log(installation);
+	      return db.insert(installation, (err, newDoc) => {
+		if (err) console.log("There's a problem with the database ", err);
+		else if (newDoc) console.log("single team installation insert completed");
+	      });
+	}	
     },
 	  
-    fetchInstallation: async (InstallQuery) => {
+    fetchInstallation: async (installQuery) => {
 	    
-    if (installQuery.isEnterpriseInstall && installQuery.enterpriseId !== undefined) {
-      console.log("ENTERPRISE FETCH:");
-      console.log(InstallQuery);
-      let incomingteam = InstallQuery.teamId;
-      let result = await queryOne({"enterprise.id":InstallQuery.enterpriseId});
-      console.log(result);
-      return result;
-    }
+      if (installQuery.isEnterpriseInstall && installQuery.enterpriseId !== undefined) {
+	      console.log("ENTERPRISE FETCH:");
+	      console.log(installQuery);
+	      let incomingteam = installQuery.teamId;
+	      let result = await queryOne({"enterprise.id":installQuery.enterpriseId});
+	      console.log(result);
+	      return result;
+      }
 
-    if (installQuery.teamId !== undefined) {
-      console.log("SINGLE TEAM FETCH:");
-      console.log(InstallQuery);
-      let incomingteam = InstallQuery.teamId;
-      let result = await queryOne({"team.id":InstallQuery.teamId});
-      console.log(result);
-      return result;
-    }	    
+      if (installQuery.teamId !== undefined) {
+	      console.log("SINGLE TEAM FETCH:");
+	      console.log(installQuery);
+	      let incomingteam = installQuery.teamId;
+	      let result = await queryOne({"team.id":installQuery.teamId});
+	      console.log(result);
+	      return result;
+      }	    
     },
   },
 });
