@@ -64,22 +64,152 @@ app.event('app_home_opened', async ({ event, client }) => {
       // Use the user ID associated with the event
       user_id: event.user,
       view: {
-        // Home tabs must be enabled in your app configuration page under "App Home"
         "type": "home",
         "blocks": [
           {
-            "type": "section",
+            "type": "header",
             "text": {
-              "type": "mrkdwn",
-              "text": "*Welcome home, <@" + event.user + "> :house:*"
+              "type": "plain_text",
+              "text": ":sfdc-task: Monday, September 27th",
+              "emoji": true
             }
           },
           {
             "type": "section",
             "text": {
               "type": "mrkdwn",
-              "text": "Learn how home tabs can be more useful and interactive <https://api.slack.com/surfaces/tabs/using|*in the documentation*>."
+              "text": "You have *8 follow-up tasks* today. Use the list below to stay ahead."
             }
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "checkboxes",
+                "options": [
+                  {
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "*Review new marketing material*"
+                    },
+                    "description": {
+                      "type": "mrkdwn",
+                      "text": "*Dickenson*"
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "*Review Pricing* Monday"
+                    },
+                    "description": {
+                      "type": "mrkdwn",
+                      "text": "*Global Media*"
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "*Follow-up Call re: new presentation*"
+                    },
+                    "description": {
+                      "type": "mrkdwn",
+                      "text": "*Clara Adams*"
+                    },
+                    "value": "value-2"
+                  }
+                ],
+                "action_id": "actionId-1"
+              }
+            ]
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "button",
+                "text": {
+                  "type": "plain_text",
+                  "text": "Add to Calendar",
+                  "emoji": true
+                },
+                "value": "click_me_123",
+                "style": "primary",
+                "action_id": "actionId-0"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": ":sfdc-events:\tToday's Meetings",
+              "emoji": true
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*<Link.to|Review Exec Presentation>*"
+            }
+          },
+          {
+            "type": "context",
+            "elements": [
+              {
+                "type": "mrkdwn",
+                "text": "*With: José Martinez | 9:00 AM - 9:30 AM *"
+              }
+            ]
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "button",
+                "text": {
+                  "type": "plain_text",
+                  "text": "View",
+                  "emoji": true
+                },
+                "value": "click_me_123",
+                "action_id": "actionId-0"
+              }
+            ]
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*<Link.to|Contract Proposal>*"
+            }
+          },
+          {
+            "type": "context",
+            "elements": [
+              {
+                "type": "mrkdwn",
+                "text": "*With: Ilan Frank | 2:00 PM - 3:00 PM *"
+              }
+            ]
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "button",
+                "text": {
+                  "type": "plain_text",
+                  "text": "View",
+                  "emoji": true
+                },
+                "value": "click_me_124",
+                "action_id": "actionId-1"
+              }
+            ]
           }
         ]
       }
